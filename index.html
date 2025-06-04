@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja Daoshi Gold</title>
+  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1lLnjQ3NYt6Bd6WapJ2p0EjzfQJIbB-es">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #7e57c2;
+      --secondary-color: #5e35b1;
+      --accent-color: #b39ddb;
+      --gold-color: #ffd700;
+      --gold-dark: #d4af37;
+      --text-color: #f5f5f5;
+      --panel-bg: rgba(242, 124, 227, 0.50);
+      --panel-border: rgba(255, 215, 0, 0.3);
+      --input-bg: rgba(255, 255, 255, 0.1);
+      --input-border: rgba(255, 215, 0, 0.5);
+      --button-primary: linear-gradient(135deg, #9c27b0, #673ab7);
+      --button-hover: linear-gradient(135deg, #673ab7, #9c27b0);
+      --button-active: linear-gradient(135deg, #512da8, #7b1fa2);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+    
+    body {
+      background-image: url('https://lh3.googleusercontent.com/d/13mcKYGZFBEVkIJ2FBCzm1tDKyEXBnuuO');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(20,20,30,0.8) 100%);
+      z-index: -1;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 10px;
+      position: relative;
+      width: 100%;
+    }
+    
+    header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      background: linear-gradient(to right, var(--gold-color), #ffffff, var(--gold-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      letter-spacing: 2px;
+    }
+    
+    header p {
+      font-size: 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--accent-color);
+      font-weight: 300;
+    }
+    
+    .main-content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 20px;
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+    
+    .panel {
+      background: var(--panel-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 5px 15px rgba(0,0,0,0.2);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(10px);
+      transform: translateY(0);
+      position: relative;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.6s ease forwards;
+      flex: 1;
+      min-width: 0;
+      max-height: calc(100vh - 150px);
+      overflow-y: auto;
+    }
+    
+    .panel-gold {
+      flex: 2;
+    }
+    
+    .panel-rates {
+      flex: 1.5;
+    }
+    
+    .panel-payment {
+      flex: 1;
+    }
+    
+    .panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--gold-color), transparent);
+    }
+    
+    .panel-header {
+      position: relative;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      color: var(--gold-color);
+      position: relative;
+      display: inline-block;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 2px;
+      background: var(--gold-color);
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: var(--text-color);
+      font-size: 0.9rem;
+    }
+    
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      background: var(--input-bg);
+      color: var(--text-color);
+      border: 1px solid var(--input-border);
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    input[type="number"]:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--gold-color);
+      box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3), 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    /* Remove as setas do input number */
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    
+    .result-group {
+      margin: 10px 0;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      border-left: 3px solid var(--gold-color);
+    }
+    
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .result-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .result-label {
+      font-weight: 500;
+    }
+    
+    .result-value {
+      font-weight: 600;
+      color: var(--gold-color);
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 15px;
+      background: var(--button-primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+    .btn:hover {
+      background: var(--button-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .btn:active {
+      background: var(--button-active);
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0;
+      transform: scale(0.5);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    
+    .btn:hover::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .btn svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+    }
+    
+    .invisible-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+    }
+    
+    .invisible-button::after {
+      content: '🌸';
+      font-size: 20px;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+    
+    .invisible-button:hover::after {
+      opacity: 1;
+    }
+    
+    .rates-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 15px;
+      color: var(--gold-color);
+    }
+    
+    .rates-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 8px;
+    }
+    
+    .rate-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    
+    .rate-label {
+      display: flex;
+      align-items: center;
+    }
+    
+    .rate-label span {
+      margin-left: 5px;
+    }
+    
+    .rate-value {
+      font-weight: 600;
+      color: var(--gold-color);
+    }
+    
+    .calc-gold {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .calc-gold-title {
+      font-size: 1rem;
+      margin-bottom: 12px;
+      text-align: center;
+      color: var(--accent-color);
+    }
+    
+    .calc-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    
+    .calc-result {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold-color);
+      margin-top: 8px;
+      padding: 8px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+    }
+    
+    .payment-method {
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      border-left: 3px solid var(--gold-color);
+      margin-bottom: 15px;
+    }
+    
+    .payment-method:last-child {
+      margin-bottom: 0;
+    }
+    
+    .payment-method-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: var(--accent-color);
+    }
+    
+    .payment-method-title span {
+      margin-left: 10px;
+    }
+    
+    .payment-details {
+      font-size: 0.9rem;
+    }
+    
+    .payment-details strong {
+      color: var(--gold-color);
+    }
+    
+    .flower {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      pointer-events: none;
+      animation: fall linear infinite, fadeOut linear infinite;
+      z-index: 100;
+    }
+    
+    @keyframes fall {
+      from {
+        transform: translateY(0px) rotate(0deg);
+      }
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+    
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+    
+    .tooltip {
+      position: fixed;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: var(--gold-color);
+      border-radius: 50%;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    
+    .sound-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      border: 1px solid var(--panel-border);
+    }
+    
+    .sound-icon {
+      width: 24px;
+      height: 24px;
+      fill: var(--text-color);
+    }
+    
+    .muted .sound-icon .wave {
+      opacity: 0.3;
+    }
+    
+    .muted .sound-icon .line {
+      opacity: 1;
+    }
+    
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -100% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    /* Responsividade */
+    @media (max-width: 1200px) {
+      .main-content {
+        flex-direction: column;
+        overflow-y: auto;
+      }
+      
+      .panel {
+        max-height: none;
+        overflow-y: visible;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .main-content {
+        gap: 15px;
+      }
+    }
+    
+    /* Efeitos de digitação */
+    .typing-effect {
+      position: relative;
+    }
+    
+    .typing-effect::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-color), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+    
+    /* Volume slider */
+    .volume-slider {
+      position: fixed;
+      bottom: 20px;
+      right: 70px;
+      background: rgba(0,0,0,0.7);
+      padding: 10px 15px;
+      border-radius: 20px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      border: 1px solid var(--panel-border);
+      transform: translateX(200px);
+      opacity: 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    
+    .volume-slider.active {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    
+    .volume-slider input {
+      width: 100px;
+      margin: 0 10px;
+    }
+    
+    .volume-label {
+      color: var(--text-color);
+      font-size: 0.8rem;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Daoshi Gold Store</h1>
+      <p>BORA CASHAR???</p>
+    </header>
+    
+    <div class="main-content">
+      <!-- Painel Principal de Cálculo de Ouro -->
+      <div class="panel panel-gold">
+        <button class="invisible-button" onclick="copyMessageToClipboard()"></button>
+        
+        <div class="panel-header">
+          <h2>☀️ Cálculo de Ouro ☀️</h2>
+        </div>
+        
+        <div class="form-group">
+          <label for="quantidadeOuro">Quantidade de Ouro:</label>
+          <input type="number" id="quantidadeOuro" value="0" oninput="updateOuroCalculations()">
+        </div>
+        
+        <div class="form-group">
+          <label for="servidor">Servidor:</label>
+          <input type="text" id="servidor" placeholder="Insira o servidor">
+        </div>
+        
+        <div class="result-group">
+          <div class="result-item">
+            <div class="result-label">Total em R$:</div>
+            <div class="result-value">R$<span id="totalROuro">0.00</span></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Total em $:</div>
+            <div class="result-value">$<span id="totalDOuro">0.00</span></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Quantidade a anunciar:</div>
+            <div class="result-value"><span id="quantidadeAnunciada">0</span></div>
+          </div>
+        </div>
+        
+        <button class="btn" onclick="copyTotalsToClipboard()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          Copiar Totais
+        </button>
+      </div>
+      
+      <!-- Painel de Taxas e Conversão -->
+      <div class="panel panel-rates">
+        <div class="panel-header">
+          <h2>💲 Taxas e Conversão 💲</h2>
+        </div>
+        
+        <div class="rates-title">Taxas de Conversão</div>
+        <div class="rates-grid">
+          <div class="rate-item">
+            <div class="rate-label">💲 <span>Até 10k</span></div>
+            <div class="rate-value">R$<span id="rate10k">29.00</span></div>
+          </div>
+          <div class="rate-item">
+            <div class="rate-label">💲 <span>Acima de 10k</span></div>
+            <div class="rate-value">R$<span id="rate10kAbove">28.00</span></div>
+          </div>
+          <div class="rate-item">
+            <div class="rate-label">💲 <span>Acima de 20k</span></div>
+            <div class="rate-value">R$<span id="rate20kAbove">27.00</span></div>
+          </div>
+          <div class="rate-item">
+            <div class="rate-label">💲 <span>Acima de 30k</span></div>
+            <div class="rate-value">R$<span id="rate30kAbove">26.00</span></div>
+          </div>
+          <div class="rate-item">
+            <div class="rate-label">💲 <span>Valor cada 1k em $ (USDT)</span></div>
+            <div class="rate-value">$<span id="rateDollar">4.50</span></div>
+          </div>
+        </div>
+        
+        <div class="calc-gold">
+          <div class="calc-gold-title">Conversão Rápida</div>
+          <div class="calc-form">
+            <div class="form-group">
+              <label for="inputReal">Converter R$ para Gold:</label>
+              <input type="number" id="inputReal" placeholder="Digite valor em R$" oninput="calculateGoldFromReal()" value="0">
+              <div class="calc-result" id="resultadoReal">≈0 Gold</div>
+            </div>
+            <div class="form-group">
+              <label for="inputDollar">Converter USDT para Gold:</label>
+              <input type="number" id="inputDollar" placeholder="Digite valor em USDT" oninput="calculateGoldFromDollar()" value="0">
+              <div class="calc-result" id="resultadoDollar">≈0 Gold</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Painel de Informações de Pagamento -->
+      <div class="panel panel-payment">
+        <div class="panel-header">
+          <h2>🌸 Pagamento 🌸</h2>
+        </div>
+        
+        <div class="payment-method">
+          <div class="payment-method-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <span>Pix</span>
+          </div>
+          <div class="payment-details">
+            <p><strong>CELULAR:</strong> 14988231270</p>
+            <p><strong>Nome:</strong> DAOSHI TRADE</p>
+          </div>
+        </div>
+        
+        <div class="payment-method">
+          <div class="payment-method-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+              <circle cx="12" cy="12" r="2"></circle>
+              <path d="M6 12h.01M18 12h.01"></path>
+            </svg>
+            <span>Binance</span>
+          </div>
+          <div class="payment-details">
+            <p><strong>Email:</strong> estrela203@hotmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="particles-container" id="particles"></div>
+  
+  <div class="tooltip" id="tooltip"></div>
+  
+  <div class="sound-control" id="soundControl">
+    <svg class="sound-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/>
+      <path class="wave" d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" fill="none"/>
+      <path class="wave" d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke="currentColor" fill="none"/>
+      <line class="line" x1="23" y1="1" x2="1" y2="23" stroke="currentColor" stroke-width="2" style="opacity: 0;"/>
+    </svg>
+  </div>
+  
+  <div class="volume-slider" id="volumeSlider">
+    <span class="volume-label">Volume:</span>
+    <input type="range" min="0" max="100" value="70" id="volumeRange">
+  </div>
+  
+  <script>
+    // Variáveis de áudio
+    let audioContext;
+    let masterGainNode;
+    let isMuted = false;
+    let audioInitialized = false;
+    let audioBuffers = {};
+    
+    // Variáveis de cálculo
+    let goldRateBase = 29.00;
+    let goldRate10k = 28.00;
+    let goldRate20k = 27.00;
+    let goldRate30k = 26.00;
+    let goldRateD = 4.50;
+    let listaOuroGlobal = [];
+    
+    // Inicialização
+    window.onload = function() {
+      updateOuroCalculations();
+      calculateGoldFromReal();
+      calculateGoldFromDollar();
+      clearInputOnClick('quantidadeOuro');
+      clearInputOnClick('inputReal');
+      clearInputOnClick('inputDollar');
+      
+      // Iniciar animação de partículas
+      initParticles();
+      
+      // Iniciar animação de flores
+      setInterval(createFlower, Math.random() * 2000 + 1000);
+      
+      // Configurar controles de som
+      setupSoundControls();
+      
+      // Adicionar efeitos de hover aos botões
+      setupButtonEffects();
+    };
+    
+    // Inicializar áudio
+    async function initAudio() {
+      try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        masterGainNode = audioContext.createGain();
+        masterGainNode.gain.value = 0.7; // Volume inicial
+        masterGainNode.connect(audioContext.destination);
+        
+        // Carregar sons
+        await Promise.all([
+          loadSound('click', '/audio_files/click.mp3'),
+          loadSound('hover', '/audio_files/hover.mp3'),
+          loadSound('success', '/audio_files/success.mp3'),
+          loadSound('type', '/audio_files/type.mp3')
+        ]);
+        
+        audioInitialized = true;
+        
+        // Adicionar eventos de áudio aos elementos
+        setupAudioEvents();
+        
+      } catch (error) {
+        console.error('Erro ao inicializar áudio:', error);
+      }
+    }
+    
+    // Carregar um som
+    async function loadSound(name, url) {
+      // Simulando carregamento de som (em produção, usaria fetch real)
+      return new Promise((resolve) => {
+        // Simular um buffer de áudio
+        audioBuffers[name] = { name };
+        setTimeout(resolve, 100);
+      });
+    }
+    
+    // Tocar um som
+    function playSound(name) {
+      if (!audioInitialized || isMuted) return;
+      
+      try {
+        // Em produção, aqui criaria um buffer source real
+        // e tocaria o som carregado
+        
+        // Simulação de som para demonstração
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        // Configurações diferentes para cada tipo de som
+        switch(name) {
+          case 'click':
+            oscillator.type = 'triangle';
+            oscillator.frequency.value = 800;
+            gainNode.gain.value = 0.1;
+            break;
+          case 'hover':
+            oscillator.type = 'sine';
+            oscillator.frequency.value = 600;
+            gainNode.gain.value = 0.05;
+            break;
+          case 'success':
+            oscillator.type = 'sine';
+            oscillator.frequency.value = 1200;
+            gainNode.gain.value = 0.1;
+            break;
+          case 'type':
+            oscillator.type = 'sine';
+            oscillator.frequency.value = 440 + Math.random() * 100;
+            gainNode.gain.value = 0.03;
+            break;
+          default:
+            oscillator.frequency.value = 440;
+            gainNode.gain.value = 0.1;
+        }
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(masterGainNode);
+        
+        oscillator.start();
+        
+        // Duração curta para os sons
+        const duration = name === 'success' ? 0.3 : 0.1;
+        
+        // Fade out
+        gainNode.gain.exponentialRampToValueAtTime(
+          0.001, audioContext.currentTime + duration
+        );
+        
+        // Parar após a duração
+        setTimeout(() => {
+          oscillator.stop();
+        }, duration * 1000);
+        
+      } catch (error) {
+        console.error('Erro ao tocar som:', error);
+      }
+    }
+    
+    // Configurar controles de som
+    function setupSoundControls() {
+      const soundControl = document.getElementById('soundControl');
+      const volumeSlider = document.getElementById('volumeSlider');
+      const volumeRange = document.getElementById('volumeRange');
+      
+      soundControl.addEventListener('click', function() {
+        if (!audioInitialized) {
+          initAudio();
+        } else {
+          toggleMute();
+        }
+        
+        this.classList.toggle('muted', isMuted);
+        playSound('click');
+      });
+      
+      soundControl.addEventListener('mouseenter', function() {
+        volumeSlider.classList.add('active');
+      });
+      
+      volumeSlider.addEventListener('mouseleave', function() {
+        volumeSlider.classList.remove('active');
+      });
+      
+      volumeRange.addEventListener('input', function() {
+        if (audioInitialized) {
+          masterGainNode.gain.value = this.value / 100;
+          playSound('hover');
+        }
+      });
+    }
+    
+    // Alternar mudo/som
+    function toggleMute() {
+      isMuted = !isMuted;
+      if (audioInitialized) {
+        masterGainNode.gain.value = isMuted ? 0 : document.getElementById('volumeRange').value / 100;
+      }
+    }
+    
+    // Configurar eventos de áudio
+    function setupAudioEvents() {
+      // Adicionar sons aos inputs
+      document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('keydown', () => playSound('type'));
+      });
+      
+      // Adicionar sons aos botões
+      document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => playSound('click'));
+        button.addEventListener('mouseenter', () => playSound('hover'));
+      });
+    }
+    
+    // Configurar efeitos de botões
+    function setupButtonEffects() {
+      document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-2px)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+        
+        button.addEventListener('mousedown', function() {
+          this.style.transform = 'translateY(1px)';
+        });
+        
+        button.addEventListener('mouseup', function() {
+          this.style.transform = 'translateY(-2px)';
+        });
+      });
+    }
+    
+    // Inicializar partículas
+    function initParticles() {
+      const container = document.getElementById('particles');
+      
+      // Criar partículas iniciais
+      for (let i = 0; i < 50; i++) {
+        createParticle(container);
+      }
+      
+      // Adicionar partículas ao mover o mouse
+      document.addEventListener('mousemove', function(e) {
+        if (Math.random() > 0.9) {
+          const particle = document.createElement('div');
+          particle.classList.add('particle');
+          
+          const size = Math.random() * 5 + 2;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          
+          particle.style.left = `${e.clientX}px`;
+          particle.style.top = `${e.clientY}px`;
+          
+          container.appendChild(particle);
+          
+          setTimeout(() => {
+            particle.style.opacity = '0';
+            particle.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+            
+            setTimeout(() => {
+              particle.remove();
+            }, 1000);
+          }, 10);
+        }
+      });
+    }
+    
+    // Criar uma partícula
+    function createParticle(container) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      const size = Math.random() * 4 + 1;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.top = `${Math.random() * 100}vh`;
+      particle.style.opacity = Math.random() * 0.5 + 0.1;
+      
+      container.appendChild(particle);
+      
+      // Animação de movimento
+      setInterval(() => {
+        particle.style.transform = `translate(${(Math.random() - 0.5) * 20}px, ${(Math.random() - 0.5) * 20}px)`;
+      }, 3000);
+    }
+    
+    // Criar flor
+    function createFlower() {
+      const flowers = ['🌸', '🌺', '🌻', '🌼', '💐'];
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.transform = `rotate(${Math.random() * 360}deg)`;
+      const duration = Math.random() * 5 + 3;
+      flower.style.animationDuration = `${duration}s, ${duration}s`;
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), duration * 1000);
+    }
+    
+    // Mostrar tooltip
+    function showTooltip(message, x, y) {
+      const tooltip = document.getElementById('tooltip');
+      tooltip.textContent = message;
+      tooltip.style.left = `${x}px`;
+      tooltip.style.top = `${y}px`;
+      tooltip.style.opacity = '1';
+      
+      setTimeout(() => {
+        tooltip.style.opacity = '0';
+      }, 2000);
+    }
+    
+    // Funções de cálculo
+    function updateOuroCalculations() {
+      const quantidade = parseInt(document.getElementById('quantidadeOuro').value) || 0;
+      let goldRateR = goldRateBase;
+      
+      if (quantidade >= 30000) {
+        goldRateR = goldRate30k;
+      } else if (quantidade >= 20000) {
+        goldRateR = goldRate20k;
+      } else if (quantidade >= 10000) {
+        goldRateR = goldRate10k;
+      }
+      
+      const totalR = (quantidade / 1000) * goldRateR;
+      const totalD = (quantidade / 1000) * goldRateD;
+      listaOuroGlobal = calcularListaOuro(quantidade);
+      
+      // Animação de contagem para os totais
+      animateCounter('totalROuro', totalR.toFixed(2));
+      animateCounter('totalDOuro', totalD.toFixed(2));
+      
+      document.getElementById('quantidadeAnunciada').innerText = listaOuroGlobal.join(', ');
+      
+      // Atualiza o mini painel
+      document.getElementById('rate10k').innerText = goldRateBase.toFixed(2);
+      document.getElementById('rate10kAbove').innerText = goldRate10k.toFixed(2);
+      document.getElementById('rate20kAbove').innerText = goldRate20k.toFixed(2);
+      document.getElementById('rate30kAbove').innerText = goldRate30k.toFixed(2);
+      document.getElementById('rateDollar').innerText = goldRateD.toFixed(2);
+      
+      // Adicionar efeito de digitação
+      document.getElementById('quantidadeOuro').classList.add('typing-effect');
+      setTimeout(() => {
+        document.getElementById('quantidadeOuro').classList.remove('typing-effect');
+      }, 1000);
+    }
+    
+    function calcularListaOuro(quantidade) {
+      const quantidadeAnunciada = Math.floor(quantidade + (quantidade * 5.3 / 100));
+      let divisao = quantidade >= 20000 ? Math.ceil(quantidade / 5000) : Math.ceil(quantidade / 2500);
+      return dividirEmPartes(quantidadeAnunciada, divisao, quantidade);
+    }
+    
+    function dividirEmPartes(total, partes, quantidade) {
+      let min, max;
+      if (quantidade >= 20000) {
+        min = Math.floor(total / partes * 0.9);
+        max = Math.ceil(total / partes * 1.1);
+      } else {
+        min = Math.floor(total / partes * 0.85);
+        max = Math.ceil(total / partes * 1.15);
+      }
+      let resultado = [], soma = 0;
+      for (let i = 0; i < partes - 1; i++) {
+        const valor = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (soma + valor >= total) {
+          resultado.push(total - soma);
+          soma = total;
+          break;
+        }
+        resultado.push(valor);
+        soma += valor;
+      }
+      if (soma < total) {
+         const ultimaParte = total - soma;
+         resultado.push(ultimaParte > 0 ? ultimaParte : min);
+      } else if (resultado.length < partes && partes > 0 && total > 0 && resultado.reduce((a, b) => a + b, 0) < total) {
+        const restante = total - resultado.reduce((a, b) => a + b, 0);
+        if (restante > 0) resultado.push(restante);
+      }
+      while (resultado.length < partes && partes > 0) {
+          resultado.push(min);
+      }
+      if (resultado.length > partes && partes > 0) {
+          resultado = resultado.slice(0, partes);
+      }
+      if (partes > 0) {
+        soma = 0;
+        for (let i = 0; i < partes -1; i++) {
+            soma += resultado[i];
+        }
+        if (total - soma > 0) {
+            resultado[partes-1] = total - soma;
+        } else if (partes === 1 && total > 0) {
+             resultado[0] = total;
+        } else if (total > 0 && resultado.length > 0) {
+            let somaParcial = 0;
+            for(let i = 0; i < resultado.length -1; i++) somaParcial += resultado[i];
+            resultado[resultado.length -1] = total - somaParcial > 0 ? total - somaParcial : min;
+            let currentSum = resultado.reduce((acc, val) => acc + val, 0);
+            if (currentSum !== total && resultado.length > 0) {
+                let diff = total - currentSum;
+                resultado[resultado.length - 1] += diff;
+            }
+        }
+      }
+      return resultado.filter(val => val > 0);
+    }
+    
+    function copyTotalsToClipboard() {
+      const totalR = document.getElementById('totalROuro').innerText;
+      const totalD = document.getElementById('totalDOuro').innerText;
+      const quantidadeAnunciada = document.getElementById('quantidadeAnunciada').innerText;
+      const servidor = document.getElementById('servidor').value;
+      const textToCopy = `Servidor: ${servidor}\nTotal em R$: ${totalR}\nTotal em $: ${totalD}\nQuantidade de Ouro a anunciar: ${quantidadeAnunciada}`;
+      
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const rect = event.target.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top - 30;
+        
+        showTooltip('Totais copiados com sucesso!', x, y);
+        
+        if (audioInitialized) {
+          playSound('success');
+        }
+      });
+    }
+    
+    function copyMessageToClipboard() {
+      const text = `Ai você me encaminha o comprovante aqui na mensagem. Pois eu sou a irmã da Daoshi e não tô com acesso a conta ^^ 🌺~`;
+      
+      navigator.clipboard.writeText(text).then(() => {
+        const rect = event.target.getBoundingClientRect();
+        const x = rect.left + 30;
+        const y = rect.top + 30;
+        
+        showTooltip('Mensagem copiada com sucesso!', x, y);
+        
+        if (audioInitialized) {
+          playSound('success');
+        }
+        
+        // Criar mais flores ao copiar a mensagem secreta
+        for (let i = 0; i < 10; i++) {
+          setTimeout(createFlower, i * 200);
+        }
+      });
+    }
+    
+    function calculateGoldFromReal() {
+      const valor = parseFloat(document.getElementById('inputReal').value) || 0;
+      let rateForConversion = goldRateBase;
+      
+      if (valor / goldRateBase * 1000 >= 30000) rateForConversion = goldRate30k;
+      else if (valor / goldRateBase * 1000 >= 20000) rateForConversion = goldRate20k;
+      else if (valor / goldRateBase * 1000 >= 10000) rateForConversion = goldRate10k;
+      
+      const gold = (valor * 1000) / rateForConversion;
+      
+      // Animação de contagem
+      animateGoldResult('resultadoReal', gold);
+      
+      // Adicionar efeito de digitação
+      document.getElementById('inputReal').classList.add('typing-effect');
+      setTimeout(() => {
+        document.getElementById('inputReal').classList.remove('typing-effect');
+      }, 1000);
+    }
+    
+    function calculateGoldFromDollar() {
+      const valor = parseFloat(document.getElementById('inputDollar').value) || 0;
+      const gold = (valor * 1000) / goldRateD;
+      
+      // Animação de contagem
+      animateGoldResult('resultadoDollar', gold);
+      
+      // Adicionar efeito de digitação
+      document.getElementById('inputDollar').classList.add('typing-effect');
+      setTimeout(() => {
+        document.getElementById('inputDollar').classList.remove('typing-effect');
+      }, 1000);
+    }
+    
+    // Animação de contagem para resultados de gold
+    function animateGoldResult(elementId, finalValue) {
+      const element = document.getElementById(elementId);
+      const startValue = parseInt(element.textContent.replace(/[^\d]/g, '')) || 0;
+      const duration = 500; // ms
+      const steps = 20;
+      const increment = (finalValue - startValue) / steps;
+      
+      let currentStep = 0;
+      
+      const interval = setInterval(() => {
+        currentStep++;
+        const currentValue = startValue + (increment * currentStep);
+        element.textContent = `≈${Math.round(currentValue)} Gold`;
+        
+        if (currentStep >= steps) {
+          clearInterval(interval);
+          element.textContent = `≈${Math.round(finalValue)} Gold`;
+        }
+      }, duration / steps);
+    }
+    
+    // Animação de contagem para valores numéricos
+    function animateCounter(elementId, finalValue) {
+      const element = document.getElementById(elementId);
+      const startValue = parseFloat(element.textContent) || 0;
+      const finalValueNum = parseFloat(finalValue);
+      const duration = 500; // ms
+      const steps = 20;
+      const increment = (finalValueNum - startValue) / steps;
+      
+      let currentStep = 0;
+      
+      const interval = setInterval(() => {
+        currentStep++;
+        const currentValue = startValue + (increment * currentStep);
+        element.textContent = currentValue.toFixed(2);
+        
+        if (currentStep >= steps) {
+          clearInterval(interval);
+          element.textContent = finalValue;
+        }
+      }, duration / steps);
+    }
+    
+    // Função para limpar o campo quando clicado
+    function clearInputOnClick(inputId) {
+      const input = document.getElementById(inputId);
+      input.addEventListener('focus', function() {
+        if (this.value === '0') {
+          this.value = '';
+        }
+      });
+      input.addEventListener('blur', function() {
+        if (this.value === '') {
+          this.value = '0';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
