@@ -16,7 +16,7 @@
       --gold-color: #ffd700;
       --gold-dark: #d4af37;
       --text-color: #f5f5f5;
-      --panel-bg: rgba(242, 124, 227, 0.25);
+      --panel-bg: rgba(242, 124, 227, 0.25); /* Cor do painel mantida do arquivo do usuário */
       --panel-border: rgba(255, 215, 0, 0.3);
       --input-bg: rgba(255, 255, 255, 0.1);
       --input-border: rgba(255, 215, 0, 0.5);
@@ -33,12 +33,12 @@
     }
     
     body {
-      background-image: url('https://lh3.googleusercontent.com/d/13mcKYGZFBEVkIJ2FBCzm1tDKyEXBnuuO');
+      background-image: url("https://lh3.googleusercontent.com/d/13mcKYGZFBEVkIJ2FBCzm1tDKyEXBnuuO");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
-      font-family: 'Montserrat', sans-serif;
+      font-family: "Montserrat", sans-serif;
       color: var(--text-color);
       margin: 0;
       padding: 0;
@@ -50,7 +50,7 @@
     }
     
     body::before {
-      content: '';
+      content: "";
       position: fixed;
       top: 0;
       left: 0;
@@ -79,7 +79,7 @@
     }
     
     header h1 {
-      font-family: 'Cinzel', serif;
+      font-family: "Cinzel", serif;
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 5px;
@@ -142,7 +142,7 @@
     }
     
     .panel::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
@@ -158,7 +158,7 @@
     }
     
     h2 {
-      font-family: 'Cinzel', serif;
+      font-family: "Cinzel", serif;
       font-size: 1.5rem;
       font-weight: 600;
       margin: 0;
@@ -169,7 +169,7 @@
     }
     
     h2::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -8px;
       left: 50%;
@@ -199,7 +199,7 @@
       color: var(--text-color);
       border: 1px solid var(--input-border);
       border-radius: 10px;
-      font-family: 'Montserrat', sans-serif;
+      font-family: "Montserrat", sans-serif;
       font-size: 0.95rem;
       transition: all 0.3s ease;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -259,7 +259,7 @@
       color: white;
       border: none;
       border-radius: 10px;
-      font-family: 'Montserrat', sans-serif;
+      font-family: "Montserrat", sans-serif;
       font-size: 0.95rem;
       font-weight: 500;
       cursor: pointer;
@@ -284,7 +284,7 @@
     }
     
     .btn::after {
-      content: '';
+      content: "";
       position: absolute;
       top: -50%;
       left: -50%;
@@ -320,7 +320,7 @@
     }
     
     .invisible-button::after {
-      content: '🌸';
+      content: "🌸";
       font-size: 20px;
       opacity: 0.5;
       transition: opacity 0.3s;
@@ -331,7 +331,7 @@
     }
     
     .rates-title {
-      font-family: 'Cinzel', serif;
+      font-family: "Cinzel", serif;
       font-size: 1.1rem;
       text-align: center;
       margin-bottom: 15px;
@@ -569,7 +569,7 @@
     }
     
     .typing-effect::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       left: 0;
@@ -679,7 +679,7 @@
           </div>
           <div class="rate-item">
             <div class="rate-label">💲 <span>Acima de 10k</span></div>
-            <div class="rate-value">R$<span id="rate10kAbove">28.00</span></div>
+            <div class="rate-value">R$<span id="rate10kAbove">26.00</span></div>
           </div>
           <div class="rate-item">
             <div class="rate-label">💲 <span>Acima de 20k</span></div>
@@ -687,11 +687,11 @@
           </div>
           <div class="rate-item">
             <div class="rate-label">💲 <span>Acima de 30k</span></div>
-            <div class="rate-value">R$<span id="rate30kAbove">25.00</span></div>
+            <div class="rate-value">R$<span id="rate30kAbove">24.00</span></div>
           </div>
           <div class="rate-item">
             <div class="rate-label">💲 <span>Valor cada 1k em $ (USDT)</span></div>
-            <div class="rate-value">$<span id="rateDollar">4.30</span></div>
+            <div class="rate-value">$<span id="rateDollar">4.20</span></div>
           </div>
         </div>
         
@@ -767,6 +767,9 @@
     <input type="range" min="0" max="100" value="70" id="volumeRange">
   </div>
   
+  <!-- Elemento de áudio para a música de fundo -->
+  <audio id="backgroundMusic" src="audio_files/background_music.mp3" loop></audio>
+  
   <script>
     // Variáveis de áudio
     let audioContext;
@@ -774,13 +777,14 @@
     let isMuted = false;
     let audioInitialized = false;
     let audioBuffers = {};
+    let backgroundMusic;
     
     // Variáveis de cálculo
-    let goldRateBase = 29.00;
-    let goldRate10k = 28.00;
+    let goldRateBase = 28.00;
+    let goldRate10k = 26.00;
     let goldRate20k = 25.00;
-    let goldRate30k = 25.00;
-    let goldRateD = 4.30;
+    let goldRate30k = 24.00;
+    let goldRateD = 4.20;
     let listaOuroGlobal = [];
     
     // Inicialização
@@ -791,9 +795,9 @@
       updateOuroCalculations();
       calculateGoldFromReal();
       calculateGoldFromDollar();
-      clearInputOnClick('quantidadeOuro');
-      clearInputOnClick('inputReal');
-      clearInputOnClick('inputDollar');
+      clearInputOnClick("quantidadeOuro");
+      clearInputOnClick("inputReal");
+      clearInputOnClick("inputDollar");
       
       // Iniciar animação de partículas
       initParticles();
@@ -807,19 +811,18 @@
       // Adicionar efeitos de hover aos botões
       setupButtonEffects();
       
-      // Adicionar interação para iniciar áudio
-      document.body.addEventListener('click', function() {
-        if (!audioInitialized) {
-          initAudio();
-        }
-      });
-      
-      document.body.addEventListener('keydown', function() {
-        if (!audioInitialized) {
-          initAudio();
-        }
-      });
+      // Adicionar interação para iniciar áudio (necessário para autoplay em alguns navegadores)
+      document.body.addEventListener("click", tryStartAudio, { once: true });
+      document.body.addEventListener("keydown", tryStartAudio, { once: true });
     };
+    
+    function tryStartAudio() {
+      if (!audioInitialized) {
+        initAudio();
+      } else if (backgroundMusic && backgroundMusic.paused) {
+        backgroundMusic.play().catch(e => console.log("Erro ao tentar tocar música de fundo após interação:", e));
+      }
+    }
     
     // Inicializar áudio
     async function initAudio() {
@@ -828,15 +831,19 @@
         
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         masterGainNode = audioContext.createGain();
-        masterGainNode.gain.value = 0.7; // Volume inicial
+        masterGainNode.gain.value = 0.7; // Volume inicial para efeitos
         masterGainNode.connect(audioContext.destination);
         
-        // Carregar sons
+        // Pegar elemento da música de fundo
+        backgroundMusic = document.getElementById("backgroundMusic");
+        backgroundMusic.volume = 0.5; // Volume inicial para música de fundo (ajustável)
+        
+        // Carregar sons de efeitos
         await Promise.all([
-          loadSound('click', '/audio_files/click.mp3'),
-          loadSound('hover', '/audio_files/hover.mp3'),
-          loadSound('success', '/audio_files/success.mp3'),
-          loadSound('type', '/audio_files/type.mp3')
+          loadSound("click", "/audio_files/click.mp3"),
+          loadSound("hover", "/audio_files/hover.mp3"),
+          loadSound("success", "/audio_files/success.mp3"),
+          loadSound("type", "/audio_files/type.mp3")
         ]);
         
         audioInitialized = true;
@@ -845,11 +852,16 @@
         // Adicionar eventos de áudio aos elementos
         setupAudioEvents();
         
-        // Tocar um som para testar
-        playSound('success');
+        // Tentar tocar música de fundo automaticamente
+        backgroundMusic.play().catch(e => {
+          console.log("Autoplay da música de fundo bloqueado pelo navegador. Aguardando interação do usuário.");
+        });
+        
+        // Atualizar estado do botão de som
+        document.getElementById("soundControl").classList.remove("muted");
         
       } catch (error) {
-        console.error('Erro ao inicializar áudio:', error);
+        console.error("Erro ao inicializar áudio:", error);
       }
     }
     
@@ -863,37 +875,34 @@
       });
     }
     
-    // Tocar um som
+    // Tocar um som de efeito
     function playSound(name) {
       if (!audioInitialized || isMuted) return;
       
       try {
-        // Em produção, aqui criaria um buffer source real
-        // e tocaria o som carregado
-        
         // Simulação de som para demonstração
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
         
         // Configurações diferentes para cada tipo de som
         switch(name) {
-          case 'click':
-            oscillator.type = 'triangle';
+          case "click":
+            oscillator.type = "triangle";
             oscillator.frequency.value = 800;
             gainNode.gain.value = 0.1;
             break;
-          case 'hover':
-            oscillator.type = 'sine';
+          case "hover":
+            oscillator.type = "sine";
             oscillator.frequency.value = 600;
             gainNode.gain.value = 0.05;
             break;
-          case 'success':
-            oscillator.type = 'sine';
+          case "success":
+            oscillator.type = "sine";
             oscillator.frequency.value = 1200;
             gainNode.gain.value = 0.1;
             break;
-          case 'type':
-            oscillator.type = 'sine';
+          case "type":
+            oscillator.type = "sine";
             oscillator.frequency.value = 440 + Math.random() * 100;
             gainNode.gain.value = 0.03;
             break;
@@ -908,7 +917,7 @@
         oscillator.start();
         
         // Duração curta para os sons
-        const duration = name === 'success' ? 0.3 : 0.1;
+        const duration = name === "success" ? 0.3 : 0.1;
         
         // Fade out
         gainNode.gain.exponentialRampToValueAtTime(
@@ -921,84 +930,105 @@
         }, duration * 1000);
         
       } catch (error) {
-        console.error('Erro ao tocar som:', error);
+        console.error("Erro ao tocar som:", error);
       }
     }
     
     // Configurar controles de som
     function setupSoundControls() {
-      const soundControl = document.getElementById('soundControl');
-      const volumeSlider = document.getElementById('volumeSlider');
-      const volumeRange = document.getElementById('volumeRange');
+      const soundControl = document.getElementById("soundControl");
+      const volumeSlider = document.getElementById("volumeSlider");
+      const volumeRange = document.getElementById("volumeRange");
       
-      soundControl.addEventListener('click', function() {
-        toggleMute();
-        this.classList.toggle('muted', isMuted);
-        playSound('click');
-      });
-      
-      soundControl.addEventListener('mouseenter', function() {
-        volumeSlider.classList.add('active');
-      });
-      
-      volumeSlider.addEventListener('mouseleave', function() {
-        volumeSlider.classList.remove('active');
-      });
-      
-      volumeRange.addEventListener('input', function() {
-        if (audioInitialized) {
-          masterGainNode.gain.value = this.value / 100;
-          playSound('hover');
+      soundControl.addEventListener("click", function() {
+        if (!audioInitialized) {
+          initAudio(); // Tenta inicializar se ainda não foi
+        } else {
+          toggleMute();
+          this.classList.toggle("muted", isMuted);
+          playSound("click");
         }
       });
+      
+      soundControl.addEventListener("mouseenter", function() {
+        volumeSlider.classList.add("active");
+      });
+      
+      volumeSlider.addEventListener("mouseleave", function() {
+        volumeSlider.classList.remove("active");
+      });
+      
+      volumeRange.addEventListener("input", function() {
+        if (audioInitialized) {
+          const volumeLevel = this.value / 100;
+          masterGainNode.gain.value = volumeLevel; // Ajusta volume dos efeitos
+          if (backgroundMusic) {
+            backgroundMusic.volume = volumeLevel * 0.7; // Ajusta volume da música (ex: 70% do volume dos efeitos)
+          }
+          playSound("hover");
+        }
+      });
+      
+      // Define o volume inicial no carregamento
+      if (audioInitialized) {
+          const initialVolume = volumeRange.value / 100;
+          masterGainNode.gain.value = initialVolume;
+          if (backgroundMusic) {
+              backgroundMusic.volume = initialVolume * 0.7;
+          }
+      }
     }
     
     // Alternar mudo/som
     function toggleMute() {
       isMuted = !isMuted;
       if (audioInitialized) {
-        masterGainNode.gain.value = isMuted ? 0 : document.getElementById('volumeRange').value / 100;
+        const currentVolume = document.getElementById("volumeRange").value / 100;
+        masterGainNode.gain.value = isMuted ? 0 : currentVolume;
+        if (backgroundMusic) {
+          backgroundMusic.muted = isMuted;
+        }
       }
     }
     
     // Configurar eventos de áudio
     function setupAudioEvents() {
       // Adicionar sons aos inputs
-      document.querySelectorAll('input').forEach(input => {
-        input.addEventListener('keydown', () => playSound('type'));
+      document.querySelectorAll("input").forEach(input => {
+        input.addEventListener("keydown", () => playSound("type"));
       });
       
       // Adicionar sons aos botões
-      document.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', () => playSound('click'));
-        button.addEventListener('mouseenter', () => playSound('hover'));
+      document.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", () => playSound("click"));
+        button.addEventListener("mouseenter", () => playSound("hover"));
       });
     }
     
     // Configurar efeitos de botões
     function setupButtonEffects() {
-      document.querySelectorAll('.btn').forEach(button => {
-        button.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-2px)';
+      document.querySelectorAll(".btn").forEach(button => {
+        button.addEventListener("mouseenter", function() {
+          this.style.transform = "translateY(-2px)";
         });
         
-        button.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0)';
+        button.addEventListener("mouseleave", function() {
+          this.style.transform = "translateY(0)";
         });
         
-        button.addEventListener('mousedown', function() {
-          this.style.transform = 'translateY(1px)';
+        button.addEventListener("mousedown", function() {
+          this.style.transform = "translateY(1px)";
         });
         
-        button.addEventListener('mouseup', function() {
-          this.style.transform = 'translateY(-2px)';
+        button.addEventListener("mouseup", function() {
+          this.style.transform = "translateY(-2px)";
         });
       });
     }
     
     // Inicializar partículas
     function initParticles() {
-      const container = document.getElementById('particles');
+      const container = document.getElementById("particles");
       
       // Criar partículas iniciais
       for (let i = 0; i < 50; i++) {
@@ -1006,10 +1036,10 @@
       }
       
       // Adicionar partículas ao mover o mouse
-      document.addEventListener('mousemove', function(e) {
+      document.addEventListener("mousemove", function(e) {
         if (Math.random() > 0.9) {
-          const particle = document.createElement('div');
-          particle.classList.add('particle');
+          const particle = document.createElement("div");
+          particle.classList.add("particle");
           
           const size = Math.random() * 5 + 2;
           particle.style.width = `${size}px`;
@@ -1021,7 +1051,7 @@
           container.appendChild(particle);
           
           setTimeout(() => {
-            particle.style.opacity = '0';
+            particle.style.opacity = "0";
             particle.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
             
             setTimeout(() => {
@@ -1034,8 +1064,8 @@
     
     // Criar uma partícula
     function createParticle(container) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
+      const particle = document.createElement("div");
+      particle.classList.add("particle");
       
       const size = Math.random() * 4 + 1;
       particle.style.width = `${size}px`;
@@ -1055,11 +1085,11 @@
     
     // Criar flor
     function createFlower() {
-      const flowers = ['🌸', '🌺', '🌻', '🌼', '💐'];
-      const flower = document.createElement('div');
-      flower.classList.add('flower');
+      const flowers = ["🌸", "🌺", "🌻", "🌼", "💐"];
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
       flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
-      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.left = Math.random() * 100 + "vw";
       flower.style.transform = `rotate(${Math.random() * 360}deg)`;
       const duration = Math.random() * 5 + 3;
       flower.style.animationDuration = `${duration}s, ${duration}s`;
@@ -1069,20 +1099,20 @@
     
     // Mostrar tooltip
     function showTooltip(message, x, y) {
-      const tooltip = document.getElementById('tooltip');
+      const tooltip = document.getElementById("tooltip");
       tooltip.textContent = message;
       tooltip.style.left = `${x}px`;
       tooltip.style.top = `${y}px`;
-      tooltip.style.opacity = '1';
+      tooltip.style.opacity = "1";
       
       setTimeout(() => {
-        tooltip.style.opacity = '0';
+        tooltip.style.opacity = "0";
       }, 2000);
     }
     
     // Funções de cálculo
     function updateOuroCalculations() {
-      const quantidade = parseInt(document.getElementById('quantidadeOuro').value) || 0;
+      const quantidade = parseInt(document.getElementById("quantidadeOuro").value) || 0;
       let goldRateR = goldRateBase;
       
       if (quantidade >= 30000) {
@@ -1098,26 +1128,26 @@
       listaOuroGlobal = calcularListaOuro(quantidade);
       
       // Animação de contagem para os totais
-      animateCounter('totalROuro', totalR.toFixed(2));
-      animateCounter('totalDOuro', totalD.toFixed(2));
+      animateCounter("totalROuro", totalR.toFixed(2));
+      animateCounter("totalDOuro", totalD.toFixed(2));
       
-      document.getElementById('quantidadeAnunciada').innerText = listaOuroGlobal.join(', ');
+      document.getElementById("quantidadeAnunciada").innerText = listaOuroGlobal.join(", ");
       
       // Atualiza o mini painel
-      document.getElementById('rate10k').innerText = goldRateBase.toFixed(2);
-      document.getElementById('rate10kAbove').innerText = goldRate10k.toFixed(2);
-      document.getElementById('rate20kAbove').innerText = goldRate20k.toFixed(2);
-      document.getElementById('rate30kAbove').innerText = goldRate30k.toFixed(2);
-      document.getElementById('rateDollar').innerText = goldRateD.toFixed(2);
+      document.getElementById("rate10k").innerText = goldRateBase.toFixed(2);
+      document.getElementById("rate10kAbove").innerText = goldRate10k.toFixed(2);
+      document.getElementById("rate20kAbove").innerText = goldRate20k.toFixed(2);
+      document.getElementById("rate30kAbove").innerText = goldRate30k.toFixed(2);
+      document.getElementById("rateDollar").innerText = goldRateD.toFixed(2);
       
       // Adicionar efeito de digitação
-      document.getElementById('quantidadeOuro').classList.add('typing-effect');
+      document.getElementById("quantidadeOuro").classList.add("typing-effect");
       setTimeout(() => {
-        document.getElementById('quantidadeOuro').classList.remove('typing-effect');
+        document.getElementById("quantidadeOuro").classList.remove("typing-effect");
       }, 1000);
       
       // Tocar som de digitação
-      playSound('type');
+      playSound("type");
     }
     
     function calcularListaOuro(quantidade) {
@@ -1183,10 +1213,10 @@
     }
     
     function copyTotalsToClipboard() {
-      const totalR = document.getElementById('totalROuro').innerText;
-      const totalD = document.getElementById('totalDOuro').innerText;
-      const quantidadeAnunciada = document.getElementById('quantidadeAnunciada').innerText;
-      const servidor = document.getElementById('servidor').value;
+      const totalR = document.getElementById("totalROuro").innerText;
+      const totalD = document.getElementById("totalDOuro").innerText;
+      const quantidadeAnunciada = document.getElementById("quantidadeAnunciada").innerText;
+      const servidor = document.getElementById("servidor").value;
       const textToCopy = `Servidor: ${servidor}\nTotal em R$: ${totalR}\nTotal em $: ${totalD}\nQuantidade de Ouro a anunciar: ${quantidadeAnunciada}`;
       
       navigator.clipboard.writeText(textToCopy).then(() => {
@@ -1194,9 +1224,9 @@
         const x = rect.left + rect.width / 2;
         const y = rect.top - 30;
         
-        showTooltip('Totais copiados com sucesso!', x, y);
+        showTooltip("Totais copiados com sucesso!", x, y);
         
-        playSound('success');
+        playSound("success");
       });
     }
     
@@ -1208,9 +1238,9 @@
         const x = rect.left + 30;
         const y = rect.top + 30;
         
-        showTooltip('Mensagem copiada com sucesso!', x, y);
+        showTooltip("Mensagem copiada com sucesso!", x, y);
         
-        playSound('success');
+        playSound("success");
         
         // Criar mais flores ao copiar a mensagem secreta
         for (let i = 0; i < 10; i++) {
@@ -1220,7 +1250,7 @@
     }
     
     function calculateGoldFromReal() {
-      const valor = parseFloat(document.getElementById('inputReal').value) || 0;
+      const valor = parseFloat(document.getElementById("inputReal").value) || 0;
       let rateForConversion = goldRateBase;
       
       if (valor / goldRateBase * 1000 >= 30000) rateForConversion = goldRate30k;
@@ -1230,39 +1260,39 @@
       const gold = (valor * 1000) / rateForConversion;
       
       // Animação de contagem
-      animateGoldResult('resultadoReal', gold);
+      animateGoldResult("resultadoReal", gold);
       
       // Adicionar efeito de digitação
-      document.getElementById('inputReal').classList.add('typing-effect');
+      document.getElementById("inputReal").classList.add("typing-effect");
       setTimeout(() => {
-        document.getElementById('inputReal').classList.remove('typing-effect');
+        document.getElementById("inputReal").classList.remove("typing-effect");
       }, 1000);
       
       // Tocar som de digitação
-      playSound('type');
+      playSound("type");
     }
     
     function calculateGoldFromDollar() {
-      const valor = parseFloat(document.getElementById('inputDollar').value) || 0;
+      const valor = parseFloat(document.getElementById("inputDollar").value) || 0;
       const gold = (valor * 1000) / goldRateD;
       
       // Animação de contagem
-      animateGoldResult('resultadoDollar', gold);
+      animateGoldResult("resultadoDollar", gold);
       
       // Adicionar efeito de digitação
-      document.getElementById('inputDollar').classList.add('typing-effect');
+      document.getElementById("inputDollar").classList.add("typing-effect");
       setTimeout(() => {
-        document.getElementById('inputDollar').classList.remove('typing-effect');
+        document.getElementById("inputDollar").classList.remove("typing-effect");
       }, 1000);
       
       // Tocar som de digitação
-      playSound('type');
+      playSound("type");
     }
     
     // Animação de contagem para resultados de gold
     function animateGoldResult(elementId, finalValue) {
       const element = document.getElementById(elementId);
-      const startValue = parseInt(element.textContent.replace(/[^\d]/g, '')) || 0;
+      const startValue = parseInt(element.textContent.replace(/[^\d]/g, "")) || 0;
       const duration = 500; // ms
       const steps = 20;
       const increment = (finalValue - startValue) / steps;
@@ -1307,14 +1337,14 @@
     // Função para limpar o campo quando clicado
     function clearInputOnClick(inputId) {
       const input = document.getElementById(inputId);
-      input.addEventListener('focus', function() {
-        if (this.value === '0') {
-          this.value = '';
+      input.addEventListener("focus", function() {
+        if (this.value === "0") {
+          this.value = "";
         }
       });
-      input.addEventListener('blur', function() {
-        if (this.value === '') {
-          this.value = '0';
+      input.addEventListener("blur", function() {
+        if (this.value === "") {
+          this.value = "0";
         }
       });
     }
