@@ -16,7 +16,7 @@
       --gold-color: #ffd700;
       --gold-dark: #d4af37;
       --text-color: #f5f5f5;
-      --panel-bg: rgba(242, 124, 227, 0.50);
+      --panel-bg: rgba(242, 124, 227, 0.25);
       --panel-border: rgba(255, 215, 0, 0.3);
       --input-bg: rgba(255, 255, 255, 0.1);
       --input-border: rgba(255, 215, 0, 0.5);
@@ -785,6 +785,9 @@
     
     // Inicialização
     window.onload = function() {
+      // Inicializar áudio automaticamente
+      initAudio();
+      
       updateOuroCalculations();
       calculateGoldFromReal();
       calculateGoldFromDollar();
@@ -803,11 +806,26 @@
       
       // Adicionar efeitos de hover aos botões
       setupButtonEffects();
+      
+      // Adicionar interação para iniciar áudio
+      document.body.addEventListener('click', function() {
+        if (!audioInitialized) {
+          initAudio();
+        }
+      });
+      
+      document.body.addEventListener('keydown', function() {
+        if (!audioInitialized) {
+          initAudio();
+        }
+      });
     };
     
     // Inicializar áudio
     async function initAudio() {
       try {
+        if (audioInitialized) return;
+        
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         masterGainNode = audioContext.createGain();
         masterGainNode.gain.value = 0.7; // Volume inicial
@@ -822,9 +840,13 @@
         ]);
         
         audioInitialized = true;
+        isMuted = false;
         
         // Adicionar eventos de áudio aos elementos
         setupAudioEvents();
+        
+        // Tocar um som para testar
+        playSound('success');
         
       } catch (error) {
         console.error('Erro ao inicializar áudio:', error);
@@ -910,12 +932,7 @@
       const volumeRange = document.getElementById('volumeRange');
       
       soundControl.addEventListener('click', function() {
-        if (!audioInitialized) {
-          initAudio();
-        } else {
-          toggleMute();
-        }
-        
+        toggleMute();
         this.classList.toggle('muted', isMuted);
         playSound('click');
       });
@@ -1098,6 +1115,9 @@
       setTimeout(() => {
         document.getElementById('quantidadeOuro').classList.remove('typing-effect');
       }, 1000);
+      
+      // Tocar som de digitação
+      playSound('type');
     }
     
     function calcularListaOuro(quantidade) {
@@ -1176,9 +1196,7 @@
         
         showTooltip('Totais copiados com sucesso!', x, y);
         
-        if (audioInitialized) {
-          playSound('success');
-        }
+        playSound('success');
       });
     }
     
@@ -1192,9 +1210,7 @@
         
         showTooltip('Mensagem copiada com sucesso!', x, y);
         
-        if (audioInitialized) {
-          playSound('success');
-        }
+        playSound('success');
         
         // Criar mais flores ao copiar a mensagem secreta
         for (let i = 0; i < 10; i++) {
@@ -1221,6 +1237,9 @@
       setTimeout(() => {
         document.getElementById('inputReal').classList.remove('typing-effect');
       }, 1000);
+      
+      // Tocar som de digitação
+      playSound('type');
     }
     
     function calculateGoldFromDollar() {
@@ -1235,6 +1254,9 @@
       setTimeout(() => {
         document.getElementById('inputDollar').classList.remove('typing-effect');
       }, 1000);
+      
+      // Tocar som de digitação
+      playSound('type');
     }
     
     // Animação de contagem para resultados de gold
